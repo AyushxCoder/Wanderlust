@@ -1,0 +1,217 @@
+<!-- <h3>All Listings</h3> -->
+<!-- <form method="get" action="/listings/new">
+  <button>Create New Listing</button>
+</form> -->
+
+<style>
+  @media (max-width: 768px) {
+    .navbar-collapse {
+      position: fixed;
+      top: 0;
+      right: 220px;
+      height: 100vh;
+      width: 260px;
+      background-color: rgba(255, 255, 255, 0.95);
+      z-index: 1040;
+      padding: 2rem 1rem;
+      border-radius: 0;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .navbar-toggler {
+      position: absolute;
+      top: 1rem;
+      right: 3rem;
+      z-index: 1060; /* Make sure it's above the menu */
+    }
+
+    .navbar-brand {
+      z-index: 1060;
+      position: relative;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    .tax-toggle {
+      font-size: 0.8rem;
+    }
+  }
+  @media screen and ((min-width: 768px) and (max-width: 992px)) {
+    .hide7 {
+      display: none !important;
+    }
+  }
+
+  @media screen and ((min-width: 992px) and (max-width: 1200px)) {
+    .hide9 {
+      display: none !important;
+    }
+  }
+
+  @media screen and ((min-width: 1200px) and (max-width: 1400px)) {
+    .hide12 {
+      display: none !important;
+    }
+  }
+
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer; 
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+  }
+
+  #navbarSupportedContent{
+    z-index: 1;
+  }
+
+  .tax-info {
+    display: none;
+  }
+
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+  }
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-tertiary" id="mainNavbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+   
+    <div class="collapse navbar-collapse navbarMenu mt-3" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="filters">
+        <li class="nav-item filter">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+          </a>
+        </li>
+        <li class="nav-item filter">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+          </a>
+        </li>
+        <li class="nav-item filter">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+          </a>
+        </li>
+        <li class="nav-item filter hide7">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+          </a>
+        </li>
+        <li class="nav-item filter hide7">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+          </a>
+        </li>
+        <li class="nav-item filter hide7">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+          </a>
+        </li>
+        <li class="nav-item filter hide hide7 hide9">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+          </a>
+        </li>
+        <li class="nav-item filter hide hide7 hide9">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-cow"></i></div>
+            <p>Farms</p>
+          </a>
+        </li>
+        <li class="nav-item filter hide hide7 hide9 hide12">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Arctic Pools</p>
+          </a>
+        </li> 
+        <li class="nav-item filter hide hide7 hide9 hide12">
+          <a class="nav-link active" aria-current="page" href="#">
+            <div><i class="fa-solid fa-igloo"></i></div>
+            <p>Domes</p>
+          </a>
+        </li>   
+      </ul>
+
+      <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Display total after Taxes</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+  
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  <% for(let listing of allListings)  { %>
+  <a href="/listings/<%= listing._id %>" class="listing-link">
+      <div class="card listing-card col">
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top" 
+        alt="listing_image" 
+        style="height: 20rem"
+      />
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
+        <p class="card-text">
+          <b><%= listing.title %></b><br>
+          &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+          <i class="tax-info">&nbsp; &nbsp; +18% GST</i>
+        </p>
+      </div>
+    </div>
+  </a>
+  <% } %>
+</div>
+
+<script>
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for(info of taxInfo) {
+      if(info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+</script>
