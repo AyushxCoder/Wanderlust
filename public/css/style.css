@@ -115,3 +115,15 @@ body {
   padding-left: 0;
   padding-right: 0;   
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("up-house.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+}
