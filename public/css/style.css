@@ -64,6 +64,8 @@ body {
 
 .card-img-top {
   border-radius: 1rem !important ;
+  
+  background: linear-gradient(to right, #4facfe, #00f2fe);
   width: 100% !important;
   object-fit: cover !important;
 }
