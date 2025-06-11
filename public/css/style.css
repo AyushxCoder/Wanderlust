@@ -68,6 +68,11 @@ body {
   object-fit: cover !important;
 }
 
+.card-img-top-index {
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
 .card-body {
   padding: 0 !important;
 }
